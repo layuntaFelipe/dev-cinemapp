@@ -120,6 +120,12 @@ struct Detail: Decodable {
     let Production: String
 }
 
+struct FavoritesMovies: Identifiable{
+   
+    let id: String
+    let url: String
+}
+
 struct ContentView: View {
     
     @ObservedObject var networkManager = NetworkManager()
@@ -134,10 +140,13 @@ struct ContentView: View {
     
     @State var showDetailView: Bool = false
     @State var showResults: Bool = false
+    @State var showFavorites: Bool = false
     
     @State var id: String = ""
     
-    @State var favoritesMovies = [String]()
+    @State var favoritesMovies = [FavoritesMovies]()
+    
+    @State var star: Bool = false
     
     var body: some View {
         ZStack{
@@ -169,39 +178,10 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                         })
                     }
+                    .padding(.horizontal)
                     
-                    if !showResults {
-                        HStack{
-                            VStack(alignment: .leading){
-                                Text("Favorites Movies ⭐️")
-                                    .font(.system(size: 21, weight: .semibold, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(.vertical)
-                                
-                                
-                                ZStack{
-                                    Color.gray.opacity(0.3)
-                                    Button(action: {
-                                        print(favoritesMovies)
-                                    }, label: {
-                                        Image(systemName: "plus.circle.fill")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .scaleEffect(0.5)
-                                            .foregroundColor(Color("background"))
-                                    })
-                                }
-                                .frame(width: 160, height: 220, alignment: .center)
-                                .cornerRadius(20)
-                                
-                            }
-                            
-                            Spacer()
-                        }
-                    }
-                    
-                    if showResults {
-                        LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+                    ScrollView(.horizontal, showsIndicators: false){
+                        HStack(spacing: 20){
                             ForEach(networkManager.search) {search in
                                 Button(action: {
                                     showDetailView.toggle()
@@ -212,19 +192,57 @@ struct ContentView: View {
                                         .scaledToFit()
                                         .cornerRadius(10)
                                 })
+                                .frame(width: 211, height: 290)
                             }
                         }
-                        
-                        Text(networkManager.totalResults)
-                            .foregroundColor(.white)
                     }
+                    .padding(.vertical)
+                    
+                    
+                    HStack{
+                        Text("Favorites Movies")
+                            .font(.system(size: 21, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.vertical)
+                        
+                        Button(action: {
+                            print(favoritesMovies)
+                            showFavorites.toggle()
+                        }, label: {
+                            Text("⭐️")
+                        })
+                        
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    if showFavorites {
+                        LazyVGrid(columns: gridLayout, spacing: 20) {
+                            ForEach(favoritesMovies) {movie in
+                                Button(action: {
+                                    id = movie.id
+                                    star = true
+                                    showDetailView.toggle()
+                                }, label: {
+                                    Image(uiImage: movie.url.loadImage())
+                                        .resizable()
+                                        .scaledToFit()
+                                })
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    
                 }
-                .padding()
-                .edgesIgnoringSafeArea(.bottom)
+                .padding(.bottom)
+                
             } else {
-                DetailView(id: id, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
+                DetailView(id: id, isFavorite: star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

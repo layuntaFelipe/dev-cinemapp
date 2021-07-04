@@ -12,10 +12,10 @@ struct DetailView: View {
     @ObservedObject var networkManager = NetworkManager()
     
     var id: String
-    @State var isFavorite: Bool = false
+    @State var isFavorite: Bool
     @Binding var showDetailView: Bool
     
-    @Binding var favoritesMovies: [String]
+    @Binding var favoritesMovies: [FavoritesMovies]
     
     var body: some View {
         ZStack {
@@ -81,9 +81,8 @@ struct DetailView: View {
                             Spacer()
                             Button(action: {
                                 isFavorite.toggle()
-                                if isFavorite {
-                                    favoritesMovies.append(id)
-                                }
+                                let movie = FavoritesMovies(id: id, url: networkManager.moviePoster)
+                                favoritesMovies.append(movie)
                             }, label: {
                                 Image(systemName: isFavorite ? "star.fill" : "star")
                                     .resizable()
@@ -128,6 +127,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", showDetailView: .constant(false), favoritesMovies: .constant([""]))
+        DetailView(id: "tt4154664", isFavorite: false, showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]))
     }
 }

@@ -26,6 +26,7 @@ struct HeaderView: View {
                 .frame(height: 55)
                 .foregroundColor(.white)
         }
+        .padding()
     }
 }
 
