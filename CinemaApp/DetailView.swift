@@ -15,6 +15,8 @@ struct DetailView: View {
     @State var isFavorite: Bool = false
     @Binding var showDetailView: Bool
     
+    @Binding var favoritesMovies: [String]
+    
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
@@ -79,6 +81,9 @@ struct DetailView: View {
                             Spacer()
                             Button(action: {
                                 isFavorite.toggle()
+                                if isFavorite {
+                                    favoritesMovies.append(id)
+                                }
                             }, label: {
                                 Image(systemName: isFavorite ? "star.fill" : "star")
                                     .resizable()
@@ -123,6 +128,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", showDetailView: .constant(false))
+        DetailView(id: "tt4154664", showDetailView: .constant(false), favoritesMovies: .constant([""]))
     }
 }

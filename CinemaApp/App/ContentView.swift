@@ -132,24 +132,35 @@ struct ContentView: View {
         GridItem(.flexible())
     ]
     
-    @State var showDetailView = false
+    @State var showDetailView: Bool = false
+    @State var showResults: Bool = false
     
     @State var id: String = ""
+    
+    @State var favoritesMovies = [String]()
     
     var body: some View {
         ZStack{
             Color("background").ignoresSafeArea()
             if !showDetailView {
                 ScrollView(.vertical, showsIndicators: false){
+                    HeaderView()
+                    
                     HStack{
                         TextField("Type something here...", text: $textFieldText)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(10))
                             .foregroundColor(Color("background"))
                             .font(.headline)
-
+                        
                         Button(action: {
-                            networkManager.searchData(searchName: textFieldText)
+                            if textFieldText == ""{
+                                showResults.toggle()
+                            } else {
+                                networkManager.searchData(searchName: textFieldText)
+                                showResults.toggle()
+                            }
+                            
                         }, label: {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
@@ -158,28 +169,60 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                         })
                     }
-
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
-                        ForEach(networkManager.search) {search in
-                            Button(action: {
-                                showDetailView.toggle()
-                                id = search.imdbID
-                            }, label: {
-                                Image(uiImage: search.Poster.loadImage())
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(10)
-                            })
+                    
+                    if !showResults {
+                        HStack{
+                            VStack(alignment: .leading){
+                                Text("Favorites Movies ⭐️")
+                                    .font(.system(size: 21, weight: .semibold, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(.vertical)
+                                
+                                
+                                ZStack{
+                                    Color.gray.opacity(0.3)
+                                    Button(action: {
+                                        print(favoritesMovies)
+                                    }, label: {
+                                        Image(systemName: "plus.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .scaleEffect(0.5)
+                                            .foregroundColor(Color("background"))
+                                    })
+                                }
+                                .frame(width: 160, height: 220, alignment: .center)
+                                .cornerRadius(20)
+                                
+                            }
+                            
+                            Spacer()
                         }
                     }
-
-                    Text(networkManager.totalResults)
-                        .foregroundColor(.white)
+                    
+                    if showResults {
+                        LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+                            ForEach(networkManager.search) {search in
+                                Button(action: {
+                                    showDetailView.toggle()
+                                    id = search.imdbID
+                                }, label: {
+                                    Image(uiImage: search.Poster.loadImage())
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(10)
+                                })
+                            }
+                        }
+                        
+                        Text(networkManager.totalResults)
+                            .foregroundColor(.white)
+                    }
                 }
                 .padding()
                 .edgesIgnoringSafeArea(.bottom)
             } else {
-                DetailView(id: id, showDetailView: $showDetailView)
+                DetailView(id: id, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
             }
         }
     }
