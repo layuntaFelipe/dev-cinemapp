@@ -17,6 +17,7 @@
 		270FC91A2692DCD60006689A /* MoviesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FC9192692DCD60006689A /* MoviesManager.swift */; };
 		270FC91C2692DDAC0006689A /* MovieMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FC91B2692DDAC0006689A /* MovieMainInfoView.swift */; };
 		270FC91F2692E0760006689A /* MoviePlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FC91E2692E0760006689A /* MoviePlotView.swift */; };
+		276294802693345A004A06D5 /* MoviesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762947F2693345A004A06D5 /* MoviesModel.swift */; };
 		27E55D64269172BE007DDCD6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E55D63269172BE007DDCD6 /* DetailView.swift */; };
 		27EACDD92690DD2D00E8E96F /* CinemaAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EACDD82690DD2D00E8E96F /* CinemaAppApp.swift */; };
 		27EACDDB2690DD2D00E8E96F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EACDDA2690DD2D00E8E96F /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 		270FC9192692DCD60006689A /* MoviesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManager.swift; sourceTree = "<group>"; };
 		270FC91B2692DDAC0006689A /* MovieMainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMainInfoView.swift; sourceTree = "<group>"; };
 		270FC91E2692E0760006689A /* MoviePlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlotView.swift; sourceTree = "<group>"; };
+		2762947F2693345A004A06D5 /* MoviesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesModel.swift; sourceTree = "<group>"; };
 		27E55D63269172BE007DDCD6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		27EACDD52690DD2D00E8E96F /* CinemaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EACDD82690DD2D00E8E96F /* CinemaAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaAppApp.swift; sourceTree = "<group>"; };
@@ -71,14 +73,7 @@
 		270FC9162692DC740006689A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				270FC9112692DAF50006689A /* FavoritesMoviesView.swift */,
-				27EACDE72690E1C400E8E96F /* HeaderView.swift */,
-				270FC9092692D4E10006689A /* VerticalInfoView.swift */,
-				270FC90B2692D5F60006689A /* MainPosterView.swift */,
-				270FC90D2692D7500006689A /* SearchView.swift */,
-				270FC90F2692D95A0006689A /* ScrollMoviesView.swift */,
-				270FC91B2692DDAC0006689A /* MovieMainInfoView.swift */,
-				270FC91E2692E0760006689A /* MoviePlotView.swift */,
+				2762947F2693345A004A06D5 /* MoviesModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -94,11 +89,27 @@
 		27236B2A2692113E002768B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2762947E26933404004A06D5 /* App */,
+				270FC9112692DAF50006689A /* FavoritesMoviesView.swift */,
+				27EACDE72690E1C400E8E96F /* HeaderView.swift */,
+				270FC9092692D4E10006689A /* VerticalInfoView.swift */,
+				270FC90B2692D5F60006689A /* MainPosterView.swift */,
+				270FC90D2692D7500006689A /* SearchView.swift */,
+				270FC90F2692D95A0006689A /* ScrollMoviesView.swift */,
+				270FC91B2692DDAC0006689A /* MovieMainInfoView.swift */,
+				270FC91E2692E0760006689A /* MoviePlotView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2762947E26933404004A06D5 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				27EACDD82690DD2D00E8E96F /* CinemaAppApp.swift */,
 				27EACDDA2690DD2D00E8E96F /* ContentView.swift */,
 				27E55D63269172BE007DDCD6 /* DetailView.swift */,
 			);
-			path = View;
+			path = App;
 			sourceTree = "<group>";
 		};
 		27EACDCC2690DD2D00E8E96F = {
@@ -217,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276294802693345A004A06D5 /* MoviesModel.swift in Sources */,
 				270FC91C2692DDAC0006689A /* MovieMainInfoView.swift in Sources */,
 				27EACDDB2690DD2D00E8E96F /* ContentView.swift in Sources */,
 				270FC9142692DB440006689A /* Constant.swift in Sources */,

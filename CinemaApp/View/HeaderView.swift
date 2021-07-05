@@ -11,7 +11,7 @@ struct HeaderView: View {
     var body: some View {
         HStack{
             VStack(alignment: .leading){
-                Text("Hello there!")
+                Text("Hello, Sthima!")
                     .font(.system(size: 25, weight: .semibold, design: .rounded))
                     .foregroundColor(.white)
                 Text("Ready to watch some movies ?")

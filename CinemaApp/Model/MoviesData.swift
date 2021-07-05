@@ -41,9 +41,3 @@ struct Detail: Decodable {
     let imdbRating: String
     let Production: String
 }
-
-struct FavoritesMovies: Identifiable, Equatable{
-   
-    let id: String
-    let url: String
-}

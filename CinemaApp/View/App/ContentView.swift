@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var showDetailView: Bool = false
     @State var showFavorites: Bool = false
     @State var id: String = ""
-    @State var favoritesMovies = [FavoritesMovies]()
+    @State var favoritesMovies = [FavoritesMoviesModel]()
     @State var star: Bool = false
     @State var visitDetail: Bool = false
     

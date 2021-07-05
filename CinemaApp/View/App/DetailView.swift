@@ -15,7 +15,7 @@ struct DetailView: View {
     @Binding var star: Bool
     @Binding var showDetailView: Bool
     
-    @Binding var favoritesMovies: [FavoritesMovies]
+    @Binding var favoritesMovies: [FavoritesMoviesModel]
     
     @State var isAnimating: Bool = false
     @Binding var visitDetail: Bool
@@ -42,17 +42,17 @@ struct DetailView: View {
                         .padding(.top)
                         
                         
-                        VerticalInfoView(space: 25, movieTime: networkManager.movieRuntime, movieIcon: "clock")
-                        VerticalInfoView(space: 19, movieTime: networkManager.movieYear, movieIcon: "calendar")
-                        VerticalInfoView(space: 10, movieTime: networkManager.movieRating, movieIcon: "star")
+                        VerticalInfoView(space: 25, movieTime: networkManager.movieDetailModel.runtime, movieIcon: "clock")
+                        VerticalInfoView(space: 19, movieTime: networkManager.movieDetailModel.year, movieIcon: "calendar")
+                        VerticalInfoView(space: 10, movieTime: networkManager.movieDetailModel.imdbRating, movieIcon: "star")
                     }
                     Spacer()
-                    MainPosterView(imageURL: networkManager.moviePoster, isAnimating: isAnimating)
+                    MainPosterView(imageURL: networkManager.movieDetailModel.posterUrl, isAnimating: isAnimating)
                 }
                 
                 MovieMainInfoView(networkManager: networkManager, star: $star, favoritesMovies: $favoritesMovies, showDetailView: $showDetailView, id: $id)
                 
-                MoviePlotView(plotText: networkManager.moviePlot)
+                MoviePlotView(plotText: networkManager.movieDetailModel.plot)
             }
             .onAppear(perform: {
                 networkManager.lastReleased(id: id)
@@ -64,6 +64,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]), visitDetail: .constant(false))
+        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMoviesModel(id: "", url: "")]), visitDetail: .constant(false))
     }
 }

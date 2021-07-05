@@ -12,7 +12,7 @@ struct MovieMainInfoView: View {
     @ObservedObject var networkManager: NetworkManager
     
     @Binding var star: Bool
-    @Binding var favoritesMovies: [FavoritesMovies]
+    @Binding var favoritesMovies: [FavoritesMoviesModel]
     @Binding var showDetailView: Bool
     @Binding var id: String
     
@@ -20,14 +20,14 @@ struct MovieMainInfoView: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Text(networkManager.movieName)
+                    Text(networkManager.movieDetailModel.title)
                         .foregroundColor(.white)
                         .font(.system(size: 29, weight: .semibold, design: .rounded))
                     Spacer()
                     Button(action: {
                         star.toggle()
                         feedback.notificationOccurred(.success)
-                        let movie = FavoritesMovies(id: id, url: networkManager.moviePoster)
+                        let movie = FavoritesMoviesModel(id: id, url: networkManager.movieDetailModel.posterUrl)
                         if star {
                             favoritesMovies.append(movie)
                         } else {
@@ -52,9 +52,9 @@ struct MovieMainInfoView: View {
                     .padding()
                 }
                 
-                Text(networkManager.movieDirector)
+                Text(networkManager.movieDetailModel.director)
                     .foregroundColor(.white)
-                Text(networkManager.movieGenre)
+                Text(networkManager.movieDetailModel.genre)
                     .foregroundColor(.white)
                 
             }
@@ -66,7 +66,7 @@ struct MovieMainInfoView: View {
 
 struct MovieMainInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieMainInfoView(networkManager: NetworkManager(), star: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]), showDetailView: .constant(false), id: .constant(""))
+        MovieMainInfoView(networkManager: NetworkManager(), star: .constant(false), favoritesMovies: .constant([FavoritesMoviesModel(id: "", url: "")]), showDetailView: .constant(false), id: .constant(""))
             .previewLayout(.sizeThatFits)
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoritesMoviesView: View {
     
-    @Binding var favoritesMovies: [FavoritesMovies]
+    @Binding var favoritesMovies: [FavoritesMoviesModel]
     @Binding var id: String
     @Binding var star: Bool
     @Binding var showDetailView: Bool
@@ -38,7 +38,7 @@ struct FavoritesMoviesView: View {
 
 struct FavoritesMoviesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesMoviesView(favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]), id: .constant(""), star: .constant(false), showDetailView: .constant(false))
+        FavoritesMoviesView(favoritesMovies: .constant([FavoritesMoviesModel(id: "", url: "")]), id: .constant(""), star: .constant(false), showDetailView: .constant(false))
             .previewLayout(.sizeThatFits)
     }
 }
