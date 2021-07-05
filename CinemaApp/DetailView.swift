@@ -12,7 +12,7 @@ struct DetailView: View {
     @ObservedObject var networkManager = NetworkManager()
     
     var id: String
-    @State var isFavorite: Bool
+    @Binding var star: Bool
     @Binding var showDetailView: Bool
     
     @Binding var favoritesMovies: [FavoritesMovies]
@@ -80,14 +80,14 @@ struct DetailView: View {
                                 .font(.system(size: 29, weight: .semibold, design: .rounded))
                             Spacer()
                             Button(action: {
-                                isFavorite.toggle()
+                                star.toggle()
                                 let movie = FavoritesMovies(id: id, url: networkManager.moviePoster)
                                 favoritesMovies.append(movie)
                             }, label: {
-                                Image(systemName: isFavorite ? "star.fill" : "star")
+                                Image(systemName: star ? "star.fill" : "star")
                                     .resizable()
                                     .scaledToFit()
-                                    .foregroundColor(isFavorite ? .yellow : .gray)
+                                    .foregroundColor(star ? .yellow : .gray)
                                     .frame(width: 30, height: 30)
                             })
                             .padding()
@@ -127,6 +127,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", isFavorite: false, showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]))
+        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]))
     }
 }

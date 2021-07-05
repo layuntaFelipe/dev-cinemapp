@@ -120,7 +120,7 @@ struct Detail: Decodable {
     let Production: String
 }
 
-struct FavoritesMovies: Identifiable{
+struct FavoritesMovies: Identifiable, Equatable{
    
     let id: String
     let url: String
@@ -185,6 +185,7 @@ struct ContentView: View {
                             ForEach(networkManager.search) {search in
                                 Button(action: {
                                     showDetailView.toggle()
+                                    star = false
                                     id = search.imdbID
                                 }, label: {
                                     Image(uiImage: search.Poster.loadImage())
@@ -239,7 +240,7 @@ struct ContentView: View {
                 .padding(.bottom)
                 
             } else {
-                DetailView(id: id, isFavorite: star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
+                DetailView(id: id, star: $star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
