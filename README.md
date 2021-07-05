@@ -24,13 +24,13 @@ O desafio consistia em 5 principais objetivos:
 5. Um grid com os filmes favoritos
 
 ### Funcionamento do App
-Primeiramente abrit o projeto no XCode, depois escolher o despositivo que deseja rodar o simulador, eu sujiro em um despositivo fisico pois implementei alguns features que dao feedback ao usuario que nao é possivle perceber no simulador.
+Primeiramente abra o projeto no XCode, depois escolher o dispositivo que deseja rodar o simulador, eu sugiro em um dispositivo físico pois implementei alguns features que dão feedback ao usuário que não é possível perceber no simulador.
 
-Ao abrir o app, va para a barra de pesquisa, pesquise por um filme, terminar de pesquisar/clicar no butao de return ou na lupa, o texto escrito na searchBar é entao passado para o networkManager que é o objeto responsavel pelo networking do app com a API, ele entao faz o request para a API por meio de uma funcao com o texto passado pela search bar, e popula as estruturas responsaveis por resgatar os dados
+Ao abrir o app, va para a barra de pesquisa, pesquise por um filme, terminar de pesquisar/clicar no botao de return ou na lupa, o texto escrito na searchBar é entao passado para o networkManager que é o objeto responsavel pelo networking do app com a API, ele entao faz o request para a API por meio de uma funcao com o texto passado pela search bar, e adiciona nas estruturas responsaveis por resgatar os dados
 
 Depois disso, devido os dados responsaveis por resgatar os dados estarem agora com dados da api, a Scrollview faz um looping por todos os filmes resgatados que entao foram colocados em um vetor, cada item do vetor é um filme, contendo uma ID, PosterURL e outros; por meio de uma extensao do tipo String eu fui capaz de criar uma funcao que carregaria a imagem do poster apenas passando seu URL, essa imagem entao foi colocada em um botao, formando assim um scroll horizontal de posters dos filmes pesquisados;
 
-Ao clicar em um dos posters dos filmes pesquisados, a DetailView sobrepoe a ContentView, mostrando detalhes do filme, como: duracao, lancamento, nota, titulo, direcao, atores, uma breve descricao, e um botao em formato de estrela.
+Ao clicar em um dos posters dos filmes pesquisados, a DetailView sobrepõe a ContentView, mostrando detalhes do filme, como: duração, lançamento, nota, titulo, direção, atores, uma breve descrição, e um botão em formato de estrela.
 
 O botao em formato de estrela tem a funcao de colocar o filme como favorito, ao clicar no botao e a estrela ficar amarela, a ID do filme, junto com a seu posterURL sao adicionados ao vetor de filmes favoritos, que quando o usuario volta a tela principal sera carregada em um grid de filmes favoritos.
 
