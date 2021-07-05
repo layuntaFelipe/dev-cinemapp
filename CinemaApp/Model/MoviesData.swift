@@ -7,11 +7,13 @@
 
 import Foundation
 
+// API first Data
 struct Results: Decodable {
     let Search: [Search]
     let totalResults: String
 }
 
+// API Data from a title movie showing main info
 struct Search: Decodable, Identifiable {
     var id: String {
         return imdbID
@@ -22,6 +24,7 @@ struct Search: Decodable, Identifiable {
     let Poster: String
 }
 
+// API Data from ID showing the detail info from a movie
 struct Detail: Decodable {
     var Title: String
     let Year: String
