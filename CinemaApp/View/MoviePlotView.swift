@@ -7,13 +7,14 @@
 
 import SwiftUI
 
+//Detail Movie Plot View
 struct MoviePlotView: View {
     
     let plotText: String
     
     var body: some View {
         
-        Group {
+        VStack(alignment: .leading) {
             HStack{
                 Text("Plot")
                     .foregroundColor(.white)
@@ -33,5 +34,6 @@ struct MoviePlotView: View {
 struct MoviePlotView_Previews: PreviewProvider {
     static var previews: some View {
         MoviePlotView(plotText: "")
+            .previewLayout(.sizeThatFits)
     }
 }

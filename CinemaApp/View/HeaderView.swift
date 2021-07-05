@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Simple Header View
 struct HeaderView: View {
     var body: some View {
         HStack{

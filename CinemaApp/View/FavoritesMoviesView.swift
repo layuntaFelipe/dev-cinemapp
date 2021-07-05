@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+// Simple grid for the favorites movies
 struct FavoritesMoviesView: View {
     
+    // list of the favorites movies
     @Binding var favoritesMovies: [FavoritesMoviesModel]
     @Binding var id: String
     @Binding var star: Bool

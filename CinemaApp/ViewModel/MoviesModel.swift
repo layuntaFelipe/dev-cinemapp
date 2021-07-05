@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Model with the detail movie information required
 class MoviesDetailModel: ObservableObject {
     @Published var title: String = ""
     @Published var year: String = ""
@@ -23,6 +24,7 @@ class MoviesDetailModel: ObservableObject {
     @Published var production: String = ""
 }
 
+// Model with the favorite movies information required
 struct FavoritesMoviesModel: Identifiable, Equatable{
     let id: String
     let url: String

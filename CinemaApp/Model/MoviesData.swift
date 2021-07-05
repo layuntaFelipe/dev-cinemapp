@@ -20,10 +20,6 @@ struct Search: Decodable, Identifiable {
     let Year: String
     let imdbID: String
     let Poster: String
-    
-    func name() -> String {
-        return "\(Title)!"
-    }
 }
 
 struct Detail: Decodable {

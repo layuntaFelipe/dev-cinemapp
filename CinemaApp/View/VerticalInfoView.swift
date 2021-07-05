@@ -7,15 +7,17 @@
 
 import SwiftUI
 
+// Simple Vertical Info
 struct VerticalInfoView: View {
     
-    let space: Int
-    let movieTime: String
+    //Spacing between a vertical item and another
+    let space: CGFloat
+    let movieInfo: String
     let movieIcon: String
     
     var body: some View {
-        VStack(spacing: 25){
-            Text(movieTime)
+        VStack(spacing: space){
+            Text(movieInfo)
                 .foregroundColor(.white)
                 .rotationEffect(.degrees(-90))
             Image(systemName: movieIcon)
@@ -27,7 +29,7 @@ struct VerticalInfoView: View {
 
 struct VerticalInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalInfoView(space: 25, movieTime: "", movieIcon: "")
+        VerticalInfoView(space: 25, movieInfo: "", movieIcon: "")
             .previewLayout(.sizeThatFits)
     }
 }

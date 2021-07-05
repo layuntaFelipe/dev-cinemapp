@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Horizontal scroll with the results movies from search
 struct ScrollMoviesView: View {
     
     @ObservedObject var networkManager: NetworkManager
@@ -15,9 +16,12 @@ struct ScrollMoviesView: View {
     @Binding var id: String
     
     var body: some View {
+        //Horizontal scroll
         ScrollView(.horizontal, showsIndicators: false){
             HStack(spacing: 20){
+                //Looping through list of movies
                 ForEach(networkManager.search) {search in
+                    //Button that goes to the DetailView and loads the information from the movie tapped
                     Button(action: {
                         showDetailView.toggle()
                         star = false

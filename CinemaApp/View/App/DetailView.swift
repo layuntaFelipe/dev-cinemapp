@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+// Detail View of a Movie
 struct DetailView: View {
     
+    // object responsible for the API network
     @ObservedObject var networkManager = NetworkManager()
     
     @State var id: String
@@ -27,7 +29,6 @@ struct DetailView: View {
                 HStack {
                     Spacer()
                     VStack(spacing: 50){
-                        
                         Button(action: {
                             showDetailView.toggle()
                             visitDetail = true
@@ -40,11 +41,9 @@ struct DetailView: View {
                                 .frame(width: 60, height: 60)
                         })
                         .padding(.top)
-                        
-                        
-                        VerticalInfoView(space: 25, movieTime: networkManager.movieDetailModel.runtime, movieIcon: "clock")
-                        VerticalInfoView(space: 19, movieTime: networkManager.movieDetailModel.year, movieIcon: "calendar")
-                        VerticalInfoView(space: 10, movieTime: networkManager.movieDetailModel.imdbRating, movieIcon: "star")
+                        VerticalInfoView(space: 25, movieInfo: networkManager.movieDetailModel.runtime, movieIcon: "clock")
+                        VerticalInfoView(space: 19, movieInfo: networkManager.movieDetailModel.year, movieIcon: "calendar")
+                        VerticalInfoView(space: 10, movieInfo: networkManager.movieDetailModel.imdbRating, movieIcon: "star")
                     }
                     Spacer()
                     MainPosterView(imageURL: networkManager.movieDetailModel.posterUrl, isAnimating: isAnimating)
@@ -55,7 +54,7 @@ struct DetailView: View {
                 MoviePlotView(plotText: networkManager.movieDetailModel.plot)
             }
             .onAppear(perform: {
-                networkManager.lastReleased(id: id)
+                networkManager.loadIdDetailMovie(id: id)
             })
             .edgesIgnoringSafeArea(.all)
         }

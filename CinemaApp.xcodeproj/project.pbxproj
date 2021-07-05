@@ -65,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				270FC9172692DCCB0006689A /* MoviesData.swift */,
-				270FC9192692DCD60006689A /* MoviesManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -73,6 +72,7 @@
 		270FC9162692DC740006689A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				270FC9192692DCD60006689A /* MoviesManager.swift */,
 				2762947F2693345A004A06D5 /* MoviesModel.swift */,
 			);
 			path = ViewModel;

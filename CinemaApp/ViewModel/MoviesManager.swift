@@ -8,26 +8,16 @@
 import Foundation
 import SwiftUI
 
+// class responsible for organazing our API calls into our Models
 class NetworkManager: ObservableObject {
-    
-    @Published var movieName = String()
-//    @Published var movieYear = String()
-//    @Published var movieRated = String()
-//    @Published var movieRuntime = String()
-//    @Published var movieGenre = String()
-//    @Published var movieDirector = String()
-//    @Published var movieWriter = String()
-//    @Published var movieActors = String()
-//    @Published var moviePlot = String()
-//    @Published var movieAwards = String()
-//    @Published var moviePoster = String()
-//    @Published var movieRating = String()
-//    @Published var movieProduction = String()
     
     @State var movieDetailModel = MoviesDetailModel()
     @Published var search = [Search]()
+    @Published var movieName = String()
     
-    func searchData(searchName: String) {
+    // function that request the list of movies from a title passed by the user
+    func searchSimpleMovie(searchName: String) {
+        //Creating the URL from a string with the search title
         if let url = URL(string: "https://www.omdbapi.com/?apikey=925eba28&s=\(searchName)&type=movie") {
             let session = URLSession(configuration: .default)
             session.dataTask(with: url) { data, response, error in
@@ -35,7 +25,9 @@ class NetworkManager: ObservableObject {
                     let decoder = JSONDecoder()
                     if let safeData = data {
                         do {
+                            //Getting the data back
                             let results = try decoder.decode(Results.self, from: safeData)
+                            //Updating the UI using the main threat
                             DispatchQueue.main.async { [self] in
                                 search = results.Search
                             }
@@ -43,13 +35,17 @@ class NetworkManager: ObservableObject {
                             print(error)
                         }
                     }
+                } else {
+                    print(error ?? "Error on searchSimpleMovie decoder")
                 }
             }
             .resume()
         }
     }
     
-    func lastReleased(id: String) {
+    // function that request the detail information of a movie passed by a ID from the user
+    func loadIdDetailMovie(id: String) {
+        //Creating the URL from a string with the ID from the movie
         if let url = URL(string: "https://www.omdbapi.com/?apikey=925eba28&i=\(id)") {
             let session = URLSession(configuration: .default)
             session.dataTask(with: url) { data, response, error in
@@ -57,7 +53,9 @@ class NetworkManager: ObservableObject {
                     let decoder = JSONDecoder()
                     if let safeData = data {
                         do {
+                            //Getting the data back
                             let results = try decoder.decode(Detail.self, from: safeData)
+                            //Updating the UI using the main threat
                             DispatchQueue.main.async {
                                 self.movieDetailModel.title = results.Title
                                 self.movieDetailModel.year = results.Year
@@ -74,24 +72,13 @@ class NetworkManager: ObservableObject {
                                 self.movieDetailModel.production = results.Production
                                 
                                 self.movieName = results.Title
-                                
-//                                self.movieYear = results.Year
-//                                self.movieRated = results.Rated
-//                                self.movieRuntime = results.Runtime
-//                                self.movieGenre = results.Genre
-//                                self.movieDirector = results.Director
-//                                self.movieWriter = results.Writer
-//                                self.movieActors = results.Actors
-//                                self.moviePlot = results.Plot
-//                                self.movieAwards = results.Awards
-//                                self.moviePoster = results.Poster
-//                                self.movieRating = results.imdbRating
-//                                self.movieProduction = results.Production
                             }
                         } catch {
                             print(error)
                         }
                     }
+                } else {
+                    print(error ?? "Error on loadIdDetailMovie decoder")
                 }
             }
             .resume()

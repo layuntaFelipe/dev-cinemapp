@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Simple Search View
 struct SearchView: View {
     
     @ObservedObject var networkManager: NetworkManager
@@ -15,6 +16,7 @@ struct SearchView: View {
     var body: some View {
         HStack{
             TextField("Search for movie", text: $textFieldText, onCommit:  {
+                // When return key tapped the keyboard dismiss and search for movie
                 UIApplication.shared.endEditing(networkManager: networkManager, textFieldText: textFieldText)
             })
                 .padding()
@@ -22,6 +24,7 @@ struct SearchView: View {
                 .foregroundColor(.white)
                 .font(.headline)
             
+            // When button tapped the keyboard dismiss and search for movie
             Button(action: {
                 if textFieldText != ""{
                     UIApplication.shared.endEditing(networkManager: networkManager, textFieldText: textFieldText)
@@ -51,6 +54,6 @@ struct SearchView_Previews: PreviewProvider {
 extension UIApplication {
     func endEditing(networkManager: NetworkManager, textFieldText: String) {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        networkManager.searchData(searchName: textFieldText)
+        networkManager.searchSimpleMovie(searchName: textFieldText)
     }
 }

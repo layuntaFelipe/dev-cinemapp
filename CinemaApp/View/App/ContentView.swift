@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+// First Screen
 struct ContentView: View {
     
+    // object responsible for the API network
     @ObservedObject var networkManager = NetworkManager()
     
     @State var textFieldText: String = ""
