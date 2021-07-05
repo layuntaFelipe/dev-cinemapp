@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var id: String = ""
     @State var favoritesMovies = [FavoritesMovies]()
     @State var star: Bool = false
+    @State var visitDetail: Bool = false
     
     var body: some View {
         ZStack{
@@ -28,18 +29,11 @@ struct ContentView: View {
                     ScrollMoviesView(networkManager: networkManager, showDetailView: $showDetailView, star: $star, id: $id)
                     
                     HStack{
-                        Text("Favorites Movies")
+                        Text("Favorites Movies ⭐️")
                             .font(.system(size: 21, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                             .padding(.vertical)
                         
-                        Button(action: {
-                            print(favoritesMovies)
-                            showFavorites.toggle()
-                            feedback.notificationOccurred(.success)
-                        }, label: {
-                            Text("⭐️")
-                        })
                         Spacer()
                     }
                     .padding()
@@ -48,10 +42,16 @@ struct ContentView: View {
                         FavoritesMoviesView(favoritesMovies: $favoritesMovies, id: $id, star: $star, showDetailView: $showDetailView)
                     }
                 }
+                .onAppear(perform: {
+                    if visitDetail {
+                        print("Turn to true showFavorites")
+                        showFavorites = true
+                    }
+                })
                 .padding(.bottom)
                 
             } else {
-                DetailView(id: id, star: $star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
+                DetailView(id: id, star: $star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies, visitDetail: $visitDetail)
             }
         }
         .edgesIgnoringSafeArea(.bottom)

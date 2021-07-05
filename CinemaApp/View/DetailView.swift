@@ -18,6 +18,7 @@ struct DetailView: View {
     @Binding var favoritesMovies: [FavoritesMovies]
     
     @State var isAnimating: Bool = false
+    @Binding var visitDetail: Bool
     
     var body: some View {
         ZStack {
@@ -29,6 +30,7 @@ struct DetailView: View {
                         
                         Button(action: {
                             showDetailView.toggle()
+                            visitDetail = true
                         }, label: {
                             Image(systemName: "arrow.left.circle.fill")
                                 .resizable()
@@ -62,6 +64,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]))
+        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]), visitDetail: .constant(false))
     }
 }
