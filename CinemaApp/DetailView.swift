@@ -17,6 +17,9 @@ struct DetailView: View {
     
     @Binding var favoritesMovies: [FavoritesMovies]
     
+    @State var isAnimating: Bool = false
+    @Binding var movieNumber: Int
+    
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
@@ -70,6 +73,12 @@ struct DetailView: View {
                         .frame(width: 300, height: 500, alignment: .top)
                         .cornerRadius(20)
                         .shadow(color: .black, radius: 10, x: -3.0, y: 3.0)
+                        .offset(y: isAnimating ? 0 : -500)
+                        .onAppear(perform: {
+                            withAnimation(.easeOut(duration: 0.75)) {
+                                isAnimating.toggle()
+                            }
+                        })
                 }
                 
                 HStack {
@@ -82,7 +91,20 @@ struct DetailView: View {
                             Button(action: {
                                 star.toggle()
                                 let movie = FavoritesMovies(id: id, url: networkManager.moviePoster)
-                                favoritesMovies.append(movie)
+                                if star {
+                                    favoritesMovies.append(movie)
+                                } else {
+                                    print("delete")
+                                    for num in 0..<favoritesMovies.count{
+                                        if favoritesMovies[num].id == movie.id {
+                                            print("delete \(num)")
+                                            showDetailView.toggle()
+                                            favoritesMovies.remove(at: num)
+                                            return
+                                        }
+                                        print(num)
+                                    }
+                                }
                             }, label: {
                                 Image(systemName: star ? "star.fill" : "star")
                                     .resizable()
@@ -111,7 +133,7 @@ struct DetailView: View {
                     Text("delete")
                     
                 }
-
+                
                 
                 Group {
                     HStack{
@@ -137,6 +159,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]))
+        DetailView(id: "tt4154664", star: .constant(false), showDetailView: .constant(false), favoritesMovies: .constant([FavoritesMovies(id: "", url: "")]), movieNumber: .constant(0))
     }
 }

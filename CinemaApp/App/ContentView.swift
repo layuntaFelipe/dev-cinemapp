@@ -148,6 +148,8 @@ struct ContentView: View {
     
     @State var star: Bool = false
     
+    @State var movieNumber = Int()
+    
     var body: some View {
         ZStack{
             Color("background").ignoresSafeArea()
@@ -156,17 +158,16 @@ struct ContentView: View {
                     HeaderView()
                     
                     HStack{
-                        TextField("Type something here...", text: $textFieldText)
+                        TextField("Search for movie", text: $textFieldText)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(10))
-                            .foregroundColor(Color("background"))
+                            .foregroundColor(.white)
                             .font(.headline)
                         
                         Button(action: {
-                            if textFieldText == ""{
-                                showResults.toggle()
-                            } else {
+                            if textFieldText != ""{
                                 networkManager.searchData(searchName: textFieldText)
+                                textFieldText = ""
                                 showResults.toggle()
                             }
                             
@@ -177,6 +178,7 @@ struct ContentView: View {
                                 .frame(height: 35)
                                 .foregroundColor(.white)
                         })
+                        .padding()
                     }
                     .padding(.horizontal)
                     
@@ -191,9 +193,11 @@ struct ContentView: View {
                                     Image(uiImage: search.Poster.loadImage())
                                         .resizable()
                                         .scaledToFit()
-                                        .cornerRadius(10)
+                                        .cornerRadius(20)
+                                        .shadow(color: .blue.opacity(0.5), radius: 15, x: 0, y: 0)
+                                        .padding()
                                 })
-                                .frame(width: 211, height: 290)
+                                .frame(width: 233, height: 320)
                             }
                         }
                     }
@@ -225,10 +229,14 @@ struct ContentView: View {
                                     id = movie.id
                                     star = true
                                     showDetailView.toggle()
+                                    
                                 }, label: {
                                     Image(uiImage: movie.url.loadImage())
                                         .resizable()
                                         .scaledToFit()
+                                        .cornerRadius(10)
+                                        .shadow(color: .yellow.opacity(0.5), radius: 15, x: 0, y: 0)
+                                        .padding()
                                 })
                             }
                         }
@@ -240,7 +248,7 @@ struct ContentView: View {
                 .padding(.bottom)
                 
             } else {
-                DetailView(id: id, star: $star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies)
+                DetailView(id: id, star: $star, showDetailView: $showDetailView, favoritesMovies: $favoritesMovies, movieNumber: $movieNumber)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
