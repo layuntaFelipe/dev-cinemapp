@@ -103,6 +103,16 @@ struct DetailView: View {
                     Spacer()
                 }
                 
+                Button {
+                    showDetailView.toggle()
+                    favoritesMovies.removeLast()
+                    print(favoritesMovies)
+                } label: {
+                    Text("delete")
+                    
+                }
+
+                
                 Group {
                     HStack{
                         Text("Plot")
