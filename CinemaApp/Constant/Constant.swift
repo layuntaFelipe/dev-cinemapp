@@ -12,3 +12,5 @@ let gridLayout: [GridItem] = [
     GridItem(.flexible()),
     GridItem(.flexible())
 ]
+
+let feedback = UINotificationFeedbackGenerator()

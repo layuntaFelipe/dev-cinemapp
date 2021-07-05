@@ -11,7 +11,7 @@ struct HeaderView: View {
     var body: some View {
         HStack{
             VStack(alignment: .leading){
-                Text("Hello, Felipe")
+                Text("Hello there!")
                     .font(.system(size: 25, weight: .semibold, design: .rounded))
                     .foregroundColor(.white)
                 Text("Ready to watch some movies ?")
@@ -20,11 +20,12 @@ struct HeaderView: View {
             }
             Spacer()
             
-            Image(systemName: "person.circle")
+            Image("logo")
                 .resizable()
                 .scaledToFit()
                 .frame(height: 55)
                 .foregroundColor(.white)
+                .scaleEffect(1.2)
         }
         .padding()
     }

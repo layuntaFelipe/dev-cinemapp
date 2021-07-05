@@ -26,6 +26,7 @@ struct MovieMainInfoView: View {
                     Spacer()
                     Button(action: {
                         star.toggle()
+                        feedback.notificationOccurred(.success)
                         let movie = FavoritesMovies(id: id, url: networkManager.moviePoster)
                         if star {
                             favoritesMovies.append(movie)

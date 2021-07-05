@@ -36,6 +36,7 @@ struct ContentView: View {
                         Button(action: {
                             print(favoritesMovies)
                             showFavorites.toggle()
+                            feedback.notificationOccurred(.success)
                         }, label: {
                             Text("⭐️")
                         })
